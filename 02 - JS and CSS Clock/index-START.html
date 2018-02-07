@@ -62,13 +62,61 @@
       background:black;
       position: absolute;
       top:50%;
+      transition: all 0.05s;
+      transform-origin: 100%;
+      transform:rotate(90deg);
+      transition-timing-function: cubic-bezier(0.4, 0, 0.96, -0.29)
     }
+
+    .second-hand {
+      width:50%;
+      height:3px;
+      background:black;
+      position: absolute;
+      top:50%;
+      background-color:red;
+      transition: all 0.05s;
+      transform-origin: 100%;
+      transform:rotate(90deg);
+      transition-timing-function: cubic-bezier(0.4, 0, 0.96, -0.29)
+    }
+
+    .hour-hand {
+      width:50%;
+      height:8px;
+      background:black;
+      position: relative;
+      top:50%;
+      transition: all 0.05s;
+      transform-origin: 100%;
+      transform:rotate(90deg);
+      transition-timing-function: cubic-bezier(0.4, 0, 0.96, -0.29)
+    }
+
 
   </style>
 
   <script>
+  var secondHand = document.querySelector('.second-hand')
+  var minHand = document.querySelector('.min-hand')
+  var hourHand = document.querySelector('.hour-hand')
 
-
+  var secondChange = function() {
+    var day = new Date()
+    var second = day.getSeconds()
+    var min = day.getMinutes()
+    var hour = day.getHours()
+    var seconDegree = second / 60 * 360 + 90
+    var minDegree = min / 60 * 360 + second / 60 * 6 + 90
+    var hourDegree = hour / 12 * 360 + min /60 * 30 + 90
+    secondHand.style.transform = `rotate(${seconDegree}deg)`
+    minHand.style.transform = `rotate(${minDegree}deg)`
+    hourHand.style.transform = `rotate(${hourDegree}deg)`
+        
+ }
+   secondChange()
+   setInterval(secondChange, 1000)
+   
   </script>
 </body>
 </html>
