@@ -10,8 +10,35 @@
   </div>
 
 <script>
-  window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+ window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
+ const speech = new SpeechRecognition()
+ speech.interimResults = true
+ speech.lang = 'zh-CN';
+ 
+ 
+ let p = document.createElement('p')
+ const words = document.querySelector('.words')
+ words.appendChild(p);
+
+ function display(e) {
+
+   const script = Array.from(e.results).map(result => 
+    result[0].transcript).join('')
+
+   p.textContent = script;
+
+   if(e.results[0].isFinal) {
+    p = document.createElement('p')
+    words.appendChild(p);
+ 
+   }
+
+ }
+ speech.start()
+ speech.addEventListener('result', display)
+ speech.addEventListener('end', speech.start)
+ 
 
 </script>
 
@@ -22,7 +49,7 @@
     }
 
     body {
-      background:#ffc600;
+      background: mistyrose;
       font-family: 'helvetica neue';
       font-weight: 200;
       font-size: 20px;

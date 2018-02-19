@@ -31,28 +31,63 @@
 
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
-
+      var birthYear = inventors.filter(function(el){
+        return el.year >= 1500 && el.year <= 1600
+      })
+      console.table(birthYear)
     // Array.prototype.map()
     // 2. Give us an array of the inventors' first and last names
-
+      var fullName = inventors.map(function(el){
+        return el.first + ' ' + el.last
+      })
+      console.log(fullName)
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
+      var birthDate = inventors.sort(function(a, b){
+        return a.year - b.year
 
+      })
+      console.log(birthDate)
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live?
+      var years = inventors.reduce(function(total, inventor){
+         return total + (inventor.passed - inventor.year)
 
+      },0)
+
+      console.log(years)
     // 5. Sort the inventors by years lived
-
+      var yearsLived = inventors.sort(function(a, b){
+        var first = a.passed - a.year
+        var second = b.passed - b.year
+        return first - second
+      })
+      console.table(yearsLived)
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
-
-
+      //var streetNames = document.getElementByClass( )
+      
     // 7. sort Exercise
     // Sort the people alphabetically by last name
+     var lastName = people.sort(function(a,b){
+         var num1 = a.split(', ')[0] 
+         var num2 = b.split(', ')[0]
+        return num1 > num2 ? 1 : -1
 
+     })
+     console.log(lastName)
     // 8. Reduce Exercise
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
+     
+    var instance = data.reduce(function(obj, tool){
+        obj[tool] === undefined ? obj[tool] = 1: obj[tool]++
+        return obj
+
+    },{})
+    
+    console.log(instance)
+
 
   </script>
 </body>
